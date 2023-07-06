@@ -5,8 +5,16 @@ import { url } from "../../constants/requestUrl";
 import "./MovieCard.scss";
 
 const MovieCard: React.FC<IMovie> = ({ movie }) => {
-  const { id, name, title, description, img, genre, releaseDate, userRatings } =
-    movie;
+  const {
+    id,
+    name,
+    title,
+    description,
+    img,
+    genres,
+    releaseDate,
+    userRatings,
+  } = movie;
 
   const handleClick = () => {
     console.log("click");
@@ -18,7 +26,8 @@ const MovieCard: React.FC<IMovie> = ({ movie }) => {
         <img src={url + img} alt={name} className="card-image" />
       </div>
       <div className="movie-card-details">
-        <p>Жанр: {genre}</p>
+        <p>Жанры: {genres.map((genreItem) => genreItem).join(", ")}</p>
+
         <p>Дата Выпуска: {releaseDate}</p>
         <h3>{name}</h3>
         <p>Рейтинг: {userRatings.kinopoisk}</p>
