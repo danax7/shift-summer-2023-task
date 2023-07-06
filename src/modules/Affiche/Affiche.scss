@@ -1,0 +1,35 @@
+.AfficheWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 40px;
+}
+
+.Title {
+  color: #f55a5a;
+  text-align: center;
+  font-size: 72px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 80px;
+  letter-spacing: 3.6px;
+}
+
+.TitleUnderlinedText {
+  color: #252525;
+  text-align: center;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 36px;
+  text-decoration-line: underline;
+}
+
+.TitleText {
+  color: #585858;
+  text-align: center;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 36px;
+}
