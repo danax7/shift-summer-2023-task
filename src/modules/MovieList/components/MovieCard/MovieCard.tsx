@@ -4,7 +4,7 @@ import { IMovie } from "./types/IMovie";
 import { url } from "../../constants/requestUrl";
 import "./MovieCard.scss";
 
-const MovieCard: React.FC<IMovie> = ({ movie }) => {
+const MovieCard = ({ movie }) => {
   const {
     id,
     name,
@@ -31,13 +31,10 @@ const MovieCard: React.FC<IMovie> = ({ movie }) => {
         <p>Дата Выпуска: {releaseDate}</p>
         <h3>{name}</h3>
         <p>Рейтинг: {userRatings.kinopoisk}</p>
-        <a href="#" className="btn">
-          Подробнее
-        </a>
 
-        {/* <Link to={`/films/${id}`} onClick={handleClick}>
-        Подробнее
-      </Link> */}
+        <Link to={`/films/${id}`} className="btn">
+          Подробнее
+        </Link>
       </div>
     </div>
   );
