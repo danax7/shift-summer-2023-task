@@ -22,6 +22,10 @@
 .movie-card-details {
   padding: 10px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .movie-card-details h3 {

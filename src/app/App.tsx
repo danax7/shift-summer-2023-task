@@ -1,8 +1,14 @@
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
 import AffichePage from "../pages/AffichePage/ui/AffichePage";
 
 function App() {
-  return <AffichePage />;
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/home" element={<AffichePage />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 export default App;
