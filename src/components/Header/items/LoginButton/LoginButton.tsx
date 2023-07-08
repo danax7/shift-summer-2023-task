@@ -1,8 +1,8 @@
-import "./loginButton.scss";
+import s from "./loginButton.module.scss";
 const LoginButton = () => {
   return (
-    <div className="loginButtonWrapper">
-      <button className="loginButton">Войти</button>
+    <div className={s.loginButtonWrapper}>
+      <button className={s.loginButton}>Войти</button>
     </div>
   );
 };

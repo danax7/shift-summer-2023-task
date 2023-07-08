@@ -1,4 +1,4 @@
-.movie-card {
+.movie_card {
   margin: 30px;
   height: 550px;
   width: 220px;
@@ -11,15 +11,15 @@
   justify-content: space-between;
   font-family: Arial, sans-serif;
 }
-.movie-card-image {
+.movie_card_image {
   display: flex;
   justify-content: center;
 }
-.card-image {
+.card_image {
   width: 212px;
   height: 288px;
 }
-.movie-card-details {
+.movie_card_details {
   padding: 10px;
   text-align: center;
   display: flex;
@@ -28,19 +28,19 @@
   align-items: center;
 }
 
-.movie-card-details h3 {
+.movie_card_details h3 {
   margin: 0;
   font-size: 18px;
   color: #333;
 }
 
-.movie-card-details p {
+.movie_card_details p {
   margin: 5px 0;
   font-size: 14px;
   color: #777;
 }
 
-.movie-card-details .btn {
+.movie_card_details .btn {
   display: inline-block;
   padding: 8px 16px;
   background-color: #007bff;
@@ -50,6 +50,6 @@
   transition: background-color 0.3s ease;
 }
 
-.movie-card-details .btn:hover {
+.movie_card_details .btn:hover {
   background-color: #0056b3;
 }

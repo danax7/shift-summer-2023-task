@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { IMovie } from "../MovieList/components/MovieCard/types/IMovie";
 import MovieCard from "../MovieList/components/MovieCard/MovieCard";
-import "./MovieList.scss";
+import s from "./MovieList.module.scss";
 
 const MovieList = () => {
   const [movies, setMovies] = useState<IMovie[]>([]);
@@ -34,7 +34,7 @@ const MovieList = () => {
   }, []);
 
   return (
-    <div className="MovieList">
+    <div className={s.MovieList}>
       {movies.map((movie) => (
         <MovieCard key={movie.id} movie={movie} />
       ))}

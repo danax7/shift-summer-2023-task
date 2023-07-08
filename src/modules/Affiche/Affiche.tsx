@@ -1,16 +1,16 @@
-import "./Affiche.scss";
+import s from "./Affiche.module.scss";
 import MovieList from "../MovieList/MovieList";
 
 const Affiche = () => {
   return (
-    <div className="AfficheWrapper">
-      <div className="AfficheTitle">
-        <div className="Title">Афиша</div>
-        <span className="TitleUnderlinedText">cегодня</span>{" "}
-        <span className="TitleText">в прокате</span>
+    <div className={s.AfficheWrapper}>
+      <div className={s.AfficheTitle}>
+        <div className={s.Title}>Афиша</div>
+        <span className={s.TitleUnderlinedText}>cегодня</span>
+        <span className={s.TitleText}>в прокате</span>
       </div>
-      <div className="AfficheContent">
-        <div className="MoviesList">
+      <div className={s.AfficheContent}>
+        <div className={s.MoviesList}>
           <MovieList />
         </div>
       </div>

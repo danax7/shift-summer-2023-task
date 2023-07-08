@@ -1,38 +1,23 @@
-import React from "react";
 import { Link } from "react-router-dom";
-import { IMovie } from "./types/IMovie";
 import { url } from "../../constants/requestUrl";
-import "./MovieCard.scss";
+import s from "./MovieCard.module.scss";
 
 const MovieCard = ({ movie }) => {
-  const {
-    id,
-    name,
-    title,
-    description,
-    img,
-    genres,
-    releaseDate,
-    userRatings,
-  } = movie;
-
-  const handleClick = () => {
-    console.log("click");
-  };
+  const { id, name, img, genres, releaseDate, userRatings } = movie;
 
   return (
-    <div className="movie-card">
-      <div className="movie-card-image">
-        <img src={url + img} alt={name} className="card-image" />
+    <div className={s.movie_card}>
+      <div className={s.movie_card_image}>
+        <img src={url + img} alt={name} className={s.card_image} />
       </div>
-      <div className="movie-card-details">
+      <div className={s.movie_card_details}>
         <p>Жанры: {genres.map((genreItem) => genreItem).join(", ")}</p>
 
         <p>Дата Выпуска: {releaseDate}</p>
         <h3>{name}</h3>
         <p>Рейтинг: {userRatings.kinopoisk}</p>
 
-        <Link to={`/films/${id}`} className="btn">
+        <Link to={`/films/${id}`} className={s.btn}>
           Подробнее
         </Link>
       </div>

@@ -1,0 +1,22 @@
+.FilmContent {
+  width: 80vw;
+  display: flex;
+  justify-content: center;
+  &__info {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  &__imageBlock_image {
+    width: 256px;
+    height: 376px;
+  }
+}
+
+.FilmWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 40px;
+}
