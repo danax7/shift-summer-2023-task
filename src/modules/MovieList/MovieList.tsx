@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { IMovie } from "../MovieList/components/MovieCard/types/IMovie";
 import MovieCard from "../MovieList/components/MovieCard/MovieCard";

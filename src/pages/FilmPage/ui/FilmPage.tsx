@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { IMovie } from "../../../modules/MovieList/components/MovieCard/types/IMovie";
@@ -40,17 +40,22 @@ const FilmPage = () => {
             />
           </div>
           <div className={s.FilmContent__details}>
-            <h1>{film.name}</h1>
-
-            <p>Жанры: {film.genres.map((genreItem) => genreItem).join(", ")}</p>
+            <h2 className={s.FilmName}>{film.name}</h2>
+            <p className={s.director}>
+              Режиссер:{" "}
+              {film.directors.map((director) => director.fullName).join(", ")}
+            </p>
+            <p className={s.genres}>
+              Жанры: {film.genres.map((genreItem) => genreItem).join(", ")}
+            </p>
             <p>Дата Выпуска: {film.releaseDate}</p>
-            <p>Рейтинг: {film.userRatings.kinopoisk}</p>
-            <p>Описание: {film.description}</p>
-            {/* <p>
-              Режиссеры:{" "}
-              {film.directors.fullName.map((director) => director).join(", ")}
-            </p> */}
-            {/* <p>Актеры: {film.actors.map((actors) => actors).join(", ")}</p> */}
+            <p className={s.FilmRating}>
+              Kinopoisk - {film.userRatings.kinopoisk}
+            </p>
+            <p className={s.actors}>
+              Актеры: {film.actors.map((actor) => actor.fullName).join(", ")}
+            </p>
+            <p className={s.description}>Описание: {film.description}</p>
           </div>
         </div>
       </div>

@@ -1,6 +1,5 @@
-import React from "react";
 import Logo from "./items/Logo/Logo";
-import LoginButton from "./items/LoginButton/loginButton";
+import LoginButton from "./items/LoginButton/LoginButton";
 import "./Header.scss";
 
 const Header = () => {
