@@ -1,30 +1,44 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { IMovie } from "../../../modules/MovieList/components/MovieCard/types/IMovie";
+import { ISchedule } from "../../../modules/Schedule/types/ISchedule";
 import { url } from "../../../modules/MovieList/constants/requestUrl";
 import s from "./FilmPage.module.scss";
+import Schedule from "../../../modules/Schedule/Schedule";
 
 const FilmPage = () => {
   const { filmId } = useParams<{ filmId: string }>();
   const [film, setFilm] = useState<IMovie | null>(null);
-  //const [schedule, setSchedule] = useState<ISchedule[]>([]);
+  const [schedule, setSchedule] = useState<ISchedule[]>([]);
 
   useEffect(() => {
     const getFilm = async () => {
       try {
         const response = await axios.get(url + `/cinema/film/${filmId}`);
         setFilm(response.data.film);
-        console.log(response.data.film);
       } catch (error) {
         console.error("Ошибка при получении информации о фильме:", error);
       }
     };
 
+    const getSchedule = async () => {
+      try {
+        const response = await axios.get(
+          url + `/cinema/film/${filmId}/schedule`
+        );
+        setSchedule(response.data.schedules);
+        console.log(response.data.schedules);
+      } catch (error) {
+        console.error("Ошибка при получении расписания сеансов:", error);
+      }
+    };
+
     getFilm();
+    getSchedule();
   }, [filmId]);
 
-  if (!film) {
+  if (!film || schedule.length === 0) {
     return <div>Loading...</div>;
   }
 
@@ -57,6 +71,9 @@ const FilmPage = () => {
             </p>
             <p className={s.description}>Описание: {film.description}</p>
           </div>
+        </div>
+        <div className={s.Schedule}>
+          <Schedule schedule={schedule} />
         </div>
       </div>
     </div>
