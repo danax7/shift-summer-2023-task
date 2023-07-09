@@ -3,3 +3,39 @@
   justify-content: space-between;
   flex-direction: column;
 }
+
+.Dates {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.NonActiveDate {
+  background-color: #b89e9e;
+  width: 9%;
+  height: 56px;
+  border-radius: 16px;
+  border: 0;
+  font-size: 20px;
+  color: white;
+}
+
+.ActiveDate {
+  font-size: 24px;
+  color: white;
+  border: 0;
+  width: 12%;
+  height: 64px;
+  background-color: #f55a5a;
+  border-radius: 16px;
+}
+
+.Title {
+  color: #f55a5a;
+  text-align: center;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 52px;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
