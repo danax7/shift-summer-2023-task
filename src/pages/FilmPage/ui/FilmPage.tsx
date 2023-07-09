@@ -11,6 +11,7 @@ const FilmPage = () => {
   const { filmId } = useParams<{ filmId: string }>();
   const [film, setFilm] = useState<IMovie | null>(null);
   const [schedule, setSchedule] = useState<ISchedule[]>([]);
+  const [selectedDate, setSelectedDate] = useState<string>("");
 
   useEffect(() => {
     const getFilm = async () => {
@@ -27,8 +28,12 @@ const FilmPage = () => {
         const response = await axios.get(
           url + `/cinema/film/${filmId}/schedule`
         );
-        setSchedule(response.data.schedules);
-        console.log(response.data.schedules);
+        const schedules = response.data.schedules;
+
+        if (schedules.length > 0) {
+          setSchedule(schedules);
+          setSelectedDate(schedules[0].date);
+        }
       } catch (error) {
         console.error("Ошибка при получении расписания сеансов:", error);
       }
@@ -37,6 +42,10 @@ const FilmPage = () => {
     getFilm();
     getSchedule();
   }, [filmId]);
+
+  const handleDateClick = (date: string) => {
+    setSelectedDate(date);
+  };
 
   if (!film || schedule.length === 0) {
     return <div>Loading...</div>;
@@ -72,9 +81,20 @@ const FilmPage = () => {
             <p className={s.description}>Описание: {film.description}</p>
           </div>
         </div>
-        <div className={s.Schedule}>
-          <Schedule schedule={schedule} />
+
+        <div className={s.Dates}>
+          {schedule.map((scheduleItem) => (
+            <button
+              key={scheduleItem.date}
+              onClick={() => handleDateClick(scheduleItem.date)}
+              className={selectedDate === scheduleItem.date ? s.ActiveDate : ""}
+            >
+              {scheduleItem.date}
+            </button>
+          ))}
         </div>
+
+        <Schedule schedule={schedule} selectedDate={selectedDate} />
       </div>
     </div>
   );
