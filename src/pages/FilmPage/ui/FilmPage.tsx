@@ -58,8 +58,6 @@ const FilmPage = () => {
           </div>
         </div>
 
-        <h3 className={s.Title}>Расписание</h3>
-
         <Schedule filmId={filmId} />
       </div>
     </div>

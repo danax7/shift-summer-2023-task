@@ -43,6 +43,7 @@ const Schedule = (props: { filmId: string | undefined }) => {
 
   return (
     <div className={s.Schedule}>
+      <h3 className={s.Title}>Расписание</h3>
       <div className={s.Dates}>
         {schedule.map((scheduleItem) => (
           <button
@@ -58,7 +59,7 @@ const Schedule = (props: { filmId: string | undefined }) => {
           </button>
         ))}
       </div>
-      <div>
+      <div className={s.ScheduleTime}>
         <h4>Дата: {selectedSchedule.date}</h4>
         {selectedSchedule.seances.map((seance) => (
           <div key={`${seance.time}-${seance.hall.name}`}>

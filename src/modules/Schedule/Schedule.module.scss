@@ -5,13 +5,20 @@
 }
 
 .Dates {
-  display: flex;
+  display: inline-flex;
   justify-content: space-evenly;
+  align-items: center;
+  overflow: auto;
+  @media (max-width: 700px) {
+    justify-content: flex-start;
+    gap: 10px;
+  }
 }
 
 .NonActiveDate {
   background-color: #b89e9e;
   width: 9%;
+  min-width: 90px;
   height: 56px;
   border-radius: 16px;
   border: 0;
@@ -24,6 +31,7 @@
   color: white;
   border: 0;
   width: 12%;
+  min-width: 110px;
   height: 64px;
   background-color: #f55a5a;
   border-radius: 16px;
@@ -38,4 +46,10 @@
   line-height: 52px;
   letter-spacing: 0.4px;
   text-transform: uppercase;
+}
+
+.ScheduleTime {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
 }
