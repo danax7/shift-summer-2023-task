@@ -1,30 +1,34 @@
 export interface ISchedule {
-  success: true;
-  reason: "string";
-  schedules: [
-    {
-      date: "string";
-      seances: [
-        {
-          time: "string";
-          hall: {
-            name: "red";
-            places: [null];
-          };
-          payedTickets: [
-            {
-              filmId: "string";
-              row: 1;
-              column: 1;
-              seance: {
-                date: "19.06.23";
-                time: "21:57";
-              };
-              phone: "89990009999";
-            }
-          ];
-        }
-      ];
-    }
-  ];
+  success: boolean;
+  reason: string;
+  schedules: ScheduleItem[];
+}
+
+export interface ScheduleItem {
+  date: string;
+  seances: Seance[];
+}
+
+export interface Seance {
+  time: string;
+  hall: Hall;
+  payedTickets: PayedTicket[];
+}
+
+export interface Hall {
+  name: string;
+  places: null[][];
+}
+
+export interface PayedTicket {
+  filmId: string;
+  row: number;
+  column: number;
+  seance: SeanceDetails;
+  phone: string;
+}
+
+export interface SeanceDetails {
+  date: string;
+  time: string;
 }

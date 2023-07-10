@@ -1,11 +1,11 @@
-import { ISchedule } from "./types/ISchedule";
+import { ScheduleItem, Seance } from "./types/ISchedule";
 import { useEffect, useState } from "react";
 import s from "./Schedule.module.scss";
 import axios from "axios";
 import { url } from "../MovieList/constants/requestUrl";
 
 const Schedule = (props: { filmId: string | undefined }) => {
-  const [schedule, setSchedule] = useState<ISchedule[]>([]);
+  const [schedule, setSchedule] = useState<ScheduleItem[]>([]);
   const [selectedDate, setSelectedDate] = useState<string>("");
   const selectedSchedule = schedule.find((item) => item.date === selectedDate);
 
@@ -16,7 +16,7 @@ const Schedule = (props: { filmId: string | undefined }) => {
           url + `/cinema/film/${props.filmId}/schedule`
         );
         const schedules = response.data.schedules;
-
+        console.log(schedules);
         if (schedules.length > 0) {
           setSchedule(schedules);
           setSelectedDate(schedules[0].date);
@@ -60,10 +60,9 @@ const Schedule = (props: { filmId: string | undefined }) => {
         ))}
       </div>
       <div className={s.ScheduleTime}>
-        <h4>Дата: {selectedSchedule.date}</h4>
-        {selectedSchedule.seances.map((seance) => (
+        {selectedSchedule?.seances.map((seance) => (
           <div key={`${seance.time}-${seance.hall.name}`}>
-            <p>Время: {seance.time}</p>
+            <p className={s.SeanceTime__Hall}>{seance.time}</p>
             <p>Зал: {seance.hall.name}</p>
           </div>
         ))}
@@ -71,5 +70,4 @@ const Schedule = (props: { filmId: string | undefined }) => {
     </div>
   );
 };
-
 export default Schedule;
