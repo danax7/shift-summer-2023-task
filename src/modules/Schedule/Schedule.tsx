@@ -16,10 +16,15 @@ const Schedule = (props: { filmId: string | undefined }) => {
           url + `/cinema/film/${props.filmId}/schedule`
         );
         const schedules = response.data.schedules;
-        console.log(schedules);
+
         if (schedules.length > 0) {
-          setSchedule(schedules);
-          setSelectedDate(schedules[0].date);
+          const sortedSchedules = schedules.map((scheduleItem) => ({
+            ...scheduleItem,
+            seances: sortSeancesByTime(scheduleItem.seances),
+          }));
+
+          setSchedule(sortedSchedules);
+          setSelectedDate(sortedSchedules[0].date);
         }
       } catch (error) {
         console.error("Ошибка при получении расписания сеансов:", error);
@@ -31,6 +36,23 @@ const Schedule = (props: { filmId: string | undefined }) => {
 
   const handleDateClick = (date: string) => {
     setSelectedDate(date);
+  };
+
+  const sortSeancesByTime = (seances: Seance[]) => {
+    return seances.sort((a, b) => {
+      const timeA = a.time.split(":");
+      const timeB = b.time.split(":");
+      const hourA = parseInt(timeA[0]);
+      const hourB = parseInt(timeB[0]);
+      const minuteA = parseInt(timeA[1]);
+      const minuteB = parseInt(timeB[1]);
+
+      if (hourA === hourB) {
+        return minuteA - minuteB;
+      } else {
+        return hourA - hourB;
+      }
+    });
   };
 
   if (schedule.length === 0) {
@@ -70,4 +92,5 @@ const Schedule = (props: { filmId: string | undefined }) => {
     </div>
   );
 };
+
 export default Schedule;
