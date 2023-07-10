@@ -3,11 +3,12 @@ import { useEffect, useState } from "react";
 import s from "./Schedule.module.scss";
 import axios from "axios";
 import { url } from "../MovieList/constants/requestUrl";
+import SeatMatrix from "./components/SeatMatrix/Seatmatrix";
 
 const Schedule = (props: { filmId: string | undefined }) => {
   const [schedule, setSchedule] = useState<ScheduleItem[]>([]);
   const [selectedDate, setSelectedDate] = useState<string>("");
-  const selectedSchedule = schedule.find((item) => item.date === selectedDate);
+  const [selectedSeance, setSelectedSeance] = useState<Seance | null>(null);
 
   useEffect(() => {
     const getSchedule = async () => {
@@ -16,13 +17,14 @@ const Schedule = (props: { filmId: string | undefined }) => {
           url + `/cinema/film/${props.filmId}/schedule`
         );
         const schedules = response.data.schedules;
-
+        console.log(schedules);
         if (schedules.length > 0) {
-          const sortedSchedules = schedules.map((scheduleItem) => ({
-            ...scheduleItem,
-            seances: sortSeancesByTime(scheduleItem.seances),
-          }));
-
+          const sortedSchedules = schedules.map(
+            (scheduleItem: { seances: Seance[] }) => ({
+              ...scheduleItem,
+              seances: sortSeancesByTime(scheduleItem.seances),
+            })
+          );
           setSchedule(sortedSchedules);
           setSelectedDate(sortedSchedules[0].date);
         }
@@ -36,6 +38,19 @@ const Schedule = (props: { filmId: string | undefined }) => {
 
   const handleDateClick = (date: string) => {
     setSelectedDate(date);
+
+    const selectedSchedule = schedule.find((item) => item.date === date);
+
+    if (selectedSchedule && selectedSchedule.seances.length > 0) {
+      const sortedSeances = sortSeancesByTime(selectedSchedule.seances);
+      setSelectedSeance(sortedSeances[0]);
+    } else {
+      setSelectedSeance(null);
+    }
+  };
+
+  const handleSeanceClick = (seance: Seance) => {
+    setSelectedSeance(seance);
   };
 
   const sortSeancesByTime = (seances: Seance[]) => {
@@ -59,9 +74,11 @@ const Schedule = (props: { filmId: string | undefined }) => {
     return <div>Loading...</div>;
   }
 
-  if (!selectedSchedule) {
+  if (!selectedDate) {
     return <div>No schedule available for the selected date.</div>;
   }
+
+  const selectedSchedule = schedule.find((item) => item.date === selectedDate);
 
   return (
     <div className={s.Schedule}>
@@ -83,12 +100,19 @@ const Schedule = (props: { filmId: string | undefined }) => {
       </div>
       <div className={s.ScheduleTime}>
         {selectedSchedule?.seances.map((seance) => (
-          <div key={`${seance.time}-${seance.hall.name}`}>
-            <p className={s.SeanceTime__Hall}>{seance.time}</p>
+          <div
+            key={`${seance.time}-${seance.hall.name}`}
+            onClick={() => handleSeanceClick(seance)}
+            className={s.SeanceItem}
+          >
+            <p className={`${s.SeanceTime} ${s[`Hall_${seance.hall.name}`]}`}>
+              {seance.time}
+            </p>
             <p>Зал: {seance.hall.name}</p>
           </div>
         ))}
       </div>
+      {selectedSeance && <SeatMatrix seance={selectedSeance} />}
     </div>
   );
 };
