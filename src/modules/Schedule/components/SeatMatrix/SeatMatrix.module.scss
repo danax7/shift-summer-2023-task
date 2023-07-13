@@ -1,9 +1,34 @@
 .SeatGrid {
+  width: fit-content;
   display: flex;
-  align-items: center;
   justify-content: center;
+  background-color: white;
+  margin-left: auto;
+  margin-right: auto;
+  border: 2px solid #585858;
+  border-radius: 16px;
+  @media (max-width: 600px) {
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    overflow: auto;
+  }
 }
-
+.Screen {
+  margin: 10px;
+  display: flex;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+  background: #d8cdd4;
+  color: #585858;
+  border-radius: 16px 16px 0px 0px;
+  text-align: center;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 28px;
+}
 .Seat {
   width: 32px;
   height: 40px;
@@ -18,4 +43,11 @@
 .SeatUnavailable {
   border: 2px solid #d8cdd4;
   background-color: #d8cdd4;
+}
+
+.SeatComfort {
+  border: 2px solid gold;
+}
+.SeatComfort.SeatSelected {
+  background-color: gold;
 }

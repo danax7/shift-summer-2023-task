@@ -40,9 +40,9 @@ const SeatMatrix = ({ seance }: SeatMatrixProps) => {
   const formatSelectedSeats = () => {
     const formattedSeats: string[] = [];
     selectedSeats.forEach((seat) => {
-      const rowIndex = ((seat - 1) % seance.hall.places[0].length) + 1;
-      const placeIndex =
+      const rowIndex =
         Math.floor((seat - 1) / seance.hall.places[0].length) + 1;
+      const placeIndex = ((seat - 1) % seance.hall.places[0].length) + 1;
       formattedSeats.push(`${rowIndex} ряд - ${placeIndex}`);
     });
     return formattedSeats.join(", ");
@@ -55,22 +55,28 @@ const SeatMatrix = ({ seance }: SeatMatrixProps) => {
 
   return (
     <div className={s.SeatMatrix}>
+      <div className={s.Screen}>Экран</div>
       <div className={s.SeatGrid}>
-        {seance.hall.places.map((row, rowIndex) => (
-          <div key={rowIndex} className={s.SeatRow}>
-            {row.map((place, placeIndex) => {
+        {seance.hall.places[0].map((_, placeIndex) => (
+          <div key={placeIndex} className={s.SeatColumn}>
+            {seance.hall.places.map((row, rowIndex) => {
+              const place = row[placeIndex];
               const seatNumber =
                 rowIndex * seance.hall.places[0].length + placeIndex + 1;
               const isSelected = selectedSeats.includes(seatNumber);
               const isAvailable = place !== null;
               const isSeatSelected = isSelected && isAvailable;
               const isSeatUnavailable = place.type === "BLOCKED";
+              const isSeatComfort = place.type === "COMFORT";
               const seatClassNames = `${s.Seat} ${
                 isSeatSelected ? s.SeatSelected : ""
-              } ${isSeatUnavailable ? s.SeatUnavailable : ""}`;
+              } ${isSeatUnavailable ? s.SeatUnavailable : ""} ${
+                isSeatComfort ? s.SeatComfort : ""
+              }`;
+
               return (
                 <div
-                  key={placeIndex}
+                  key={rowIndex}
                   className={seatClassNames}
                   onClick={
                     place.type !== "BLOCKED"
@@ -87,12 +93,6 @@ const SeatMatrix = ({ seance }: SeatMatrixProps) => {
         <p>Выбранные места:</p>
         <span>{formatSelectedSeats()}</span>
       </div>
-      {/* {selectedSeats.length > 0 && (
-        <div className={s.SelectedSeats}>
-          <p>Выбранный ряд:</p>
-          <span>{selectedRow}</span>
-        </div>
-      )} */}
       <div className={s.SelectedSeats}>
         <p>Фильм:</p>
         {/* <span>{seance.movie}</span> */}
