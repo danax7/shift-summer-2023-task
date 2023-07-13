@@ -1,6 +1,7 @@
 import { Seance } from "../../types/ISchedule";
 import { useState } from "react";
 import s from "./SeatMatrix.module.scss";
+import OrderInfo from "../OrderInfo/OrderInfo";
 
 interface SeatMatrixProps {
   seance: Seance;
@@ -55,65 +56,50 @@ const SeatMatrix = ({ seance }: SeatMatrixProps) => {
 
   return (
     <div className={s.SeatMatrix}>
-      <div className={s.Screen}>Экран</div>
       <div className={s.SeatGrid}>
-        {seance.hall.places[0].map((_, placeIndex) => (
-          <div key={placeIndex} className={s.SeatColumn}>
-            {seance.hall.places.map((row, rowIndex) => {
-              const place = row[placeIndex];
-              const seatNumber =
-                rowIndex * seance.hall.places[0].length + placeIndex + 1;
-              const isSelected = selectedSeats.includes(seatNumber);
-              const isAvailable = place !== null;
-              const isSeatSelected = isSelected && isAvailable;
-              const isSeatUnavailable = place.type === "BLOCKED";
-              const isSeatComfort = place.type === "COMFORT";
-              const seatClassNames = `${s.Seat} ${
-                isSeatSelected ? s.SeatSelected : ""
-              } ${isSeatUnavailable ? s.SeatUnavailable : ""} ${
-                isSeatComfort ? s.SeatComfort : ""
-              }`;
+        <div className={s.Screen}>Экран</div>
+        <div className={s.GridSeates}>
+          {seance.hall.places[0].map((_, placeIndex) => (
+            <div key={placeIndex} className={s.SeatColumn}>
+              {seance.hall.places.map((row, rowIndex) => {
+                const place = row[placeIndex];
+                const seatNumber =
+                  rowIndex * seance.hall.places[0].length + placeIndex + 1;
+                const isSelected = selectedSeats.includes(seatNumber);
+                const isAvailable = place !== null;
+                const isSeatSelected = isSelected && isAvailable;
+                const isSeatUnavailable = place.type === "BLOCKED";
+                const isSeatComfort = place.type === "COMFORT";
+                const seatClassNames = `${s.Seat} ${
+                  isSeatSelected ? s.SeatSelected : ""
+                } ${isSeatUnavailable ? s.SeatUnavailable : ""} ${
+                  isSeatComfort ? s.SeatComfort : ""
+                }`;
 
-              return (
-                <div
-                  key={rowIndex}
-                  className={seatClassNames}
-                  onClick={
-                    place.type !== "BLOCKED"
-                      ? () => handleSeatClick(rowIndex, placeIndex)
-                      : null
-                  }
-                ></div>
-              );
-            })}
-          </div>
-        ))}
-      </div>
-      <div className={s.SelectedSeats}>
-        <p>Выбранные места:</p>
-        <span>{formatSelectedSeats()}</span>
-      </div>
-      <div className={s.SelectedSeats}>
-        <p>Фильм:</p>
-        {/* <span>{seance.movie}</span> */}
+                return (
+                  <div
+                    key={rowIndex}
+                    className={seatClassNames}
+                    onClick={
+                      place.type !== "BLOCKED"
+                        ? () => handleSeatClick(rowIndex, placeIndex)
+                        : null
+                    }
+                  ></div>
+                );
+              })}
+            </div>
+          ))}
+        </div>
       </div>
       {selectedSeats.length > 0 && (
-        <div className={s.SelectedSeats}>
-          <p>Общая сумма заказа:</p>
-          <span>{calculateTotalPrice()}</span>
-        </div>
+        <OrderInfo
+          seance={seance}
+          selectedSeats={selectedSeats}
+          totalPrice={calculateTotalPrice()}
+          handleClearSeats={handleClearSeats}
+        />
       )}
-      <button className={s.Button} onClick={handleClearSeats}>
-        Очистить
-      </button>
-      <button
-        className={s.Button}
-        onClick={() => {
-          console.log("Выбранные места:", selectedSeats);
-        }}
-      >
-        Забронировать
-      </button>
     </div>
   );
 };

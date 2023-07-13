@@ -116,6 +116,7 @@ const Schedule = (props: { filmId: string | undefined }) => {
           </div>
         ))}
       </div>
+
       {selectedSeance && <SeatMatrix seance={selectedSeance} />}
     </div>
   );
