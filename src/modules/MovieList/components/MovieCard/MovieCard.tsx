@@ -11,11 +11,12 @@ const MovieCard = ({ movie }) => {
         <img src={url + img} alt={name} className={s.card_image} />
       </div>
       <div className={s.movie_card_details}>
+        <h3>{name}</h3>
         <p>Жанры: {genres.map((genreItem) => genreItem).join(", ")}</p>
 
         <p>Дата Выпуска: {releaseDate}</p>
-        <h3>{name}</h3>
-        <p>Рейтинг: {userRatings.kinopoisk}</p>
+
+        <p className={s.rating}>Kinopoisk - {userRatings.kinopoisk}</p>
 
         <Link to={`/films/${id}`} className={s.btn}>
           Подробнее

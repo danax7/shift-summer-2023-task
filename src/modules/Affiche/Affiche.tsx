@@ -7,7 +7,7 @@ const Affiche = () => {
       <div className={s.AfficheTitle}>
         <div className={s.Title}>Афиша</div>
         <span className={s.TitleUnderlinedText}>cегодня</span>
-        <span className={s.TitleText}>в прокате</span>
+        <span className={s.TitleText}> в прокате</span>
       </div>
       <div className={s.AfficheContent}>
         <div className={s.MoviesList}>

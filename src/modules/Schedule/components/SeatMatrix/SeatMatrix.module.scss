@@ -1,5 +1,21 @@
 .SeatGrid {
   display: flex;
-  justify-content: space-evenly;
   align-items: center;
+  justify-content: center;
+}
+
+.Seat {
+  width: 32px;
+  height: 40px;
+  background-color: transparent;
+  border: 2px solid #585858;
+  border-radius: 4px;
+  margin: 12px;
+}
+.SeatSelected {
+  background-color: #f55a5a;
+}
+.SeatUnavailable {
+  border: 2px solid #d8cdd4;
+  background-color: #d8cdd4;
 }

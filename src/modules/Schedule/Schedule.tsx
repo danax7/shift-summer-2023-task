@@ -105,10 +105,14 @@ const Schedule = (props: { filmId: string | undefined }) => {
             onClick={() => handleSeanceClick(seance)}
             className={s.SeanceItem}
           >
-            <p className={`${s.SeanceTime} ${s[`Hall_${seance.hall.name}`]}`}>
+            <p
+              className={`${s.SeanceTime} ${s[`Hall_${seance.hall.name}`]} ${
+                selectedSeance === seance ? s.ActiveSeance : ""
+              }`}
+            >
               {seance.time}
             </p>
-            <p>Зал: {seance.hall.name}</p>
+            {/* <p>Зал: {seance.hall.name}</p> */}
           </div>
         ))}
       </div>

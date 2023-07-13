@@ -92,10 +92,24 @@
   font-weight: 700;
   line-height: 20px;
 }
+.SeanceTime.Hall_Red {
+  border: 3px solid #f55a5a;
+}
+.ActiveSeance.Hall_Red {
+  background-color: #f55a5a;
+  color: white;
+}
 .SeanceTime.Hall_Green {
   border: 3px solid #64f55a;
 }
-
+.ActiveSeance.Hall_Green {
+  background-color: #64f55a;
+  color: white;
+}
 .SeanceTime.Hall_Blue {
   border: 3px solid #4656e9;
+}
+.ActiveSeance.Hall_Blue {
+  background-color: #4656e9;
+  color: white;
 }
