@@ -2,12 +2,14 @@ import { Seance } from "../../types/ISchedule";
 import { useState } from "react";
 import s from "./SeatMatrix.module.scss";
 import OrderInfo from "../OrderInfo/OrderInfo";
+import { IMovie } from "../../../MovieList/components/MovieCard/types/IMovie";
 
 interface SeatMatrixProps {
   seance: Seance;
+  film: IMovie;
 }
 
-const SeatMatrix = ({ seance }: SeatMatrixProps) => {
+const SeatMatrix = ({ seance, film }: SeatMatrixProps) => {
   const [selectedSeats, setSelectedSeats] = useState<number[]>([]);
 
   const handleSeatClick = (rowIndex: number, placeIndex: number) => {
@@ -98,6 +100,7 @@ const SeatMatrix = ({ seance }: SeatMatrixProps) => {
           selectedSeats={selectedSeats}
           totalPrice={calculateTotalPrice()}
           handleClearSeats={handleClearSeats}
+          film={film}
         />
       )}
     </div>

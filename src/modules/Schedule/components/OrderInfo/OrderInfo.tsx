@@ -1,12 +1,14 @@
 import React from "react";
 import { Seance } from "../../types/ISchedule";
 import s from "./OrderInfo.module.scss";
+import { IMovie } from "../../../MovieList/components/MovieCard/types/IMovie";
 
 interface OrderInfoProps {
   seance: Seance;
   selectedSeats: number[];
   totalPrice: number;
   handleClearSeats: () => void;
+  film: IMovie;
 }
 
 const OrderInfo = ({
@@ -14,6 +16,7 @@ const OrderInfo = ({
   selectedSeats,
   totalPrice,
   handleClearSeats,
+  film,
 }: OrderInfoProps) => {
   const formatSelectedSeats = () => {
     return selectedSeats
@@ -29,14 +32,18 @@ const OrderInfo = ({
   return (
     <div className={s.OrderInfo}>
       <div className={s.MovieInfo}>
-        <p>Фильм: {seance.movie}</p>
-        <p>
-          Дата и время сеанса: {seance.date} {seance.time}
+        <p className={s.SeanceHall}>Зал: {seance.hall.name}</p>
+        <p className={s.FilmText}>Фильм: </p>
+        <p className={s.info}>{film.name}</p>
+        <p className={s.FilmText}>Дата и время сеанса:</p>
+        <p className={s.info}>
+          {seance.date} {seance.time}
         </p>
-        <p>Места: {formatSelectedSeats()}</p>
+        <p className={s.FilmText}>Места: </p>
+        <p className={s.info}>{formatSelectedSeats()}</p>
       </div>
       <div className={s.TotalPrice}>
-        <p>Общая сумма заказа: {totalPrice}</p>
+        <p className={s.info}>Сумма: {totalPrice}</p>
         <button className={s.Button} onClick={handleClearSeats}>
           Очистить
         </button>
@@ -46,7 +53,7 @@ const OrderInfo = ({
             console.log("Выбранные места:", selectedSeats);
           }}
         >
-          Забронировать
+          Купить
         </button>
       </div>
     </div>

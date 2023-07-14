@@ -4,8 +4,9 @@ import s from "./Schedule.module.scss";
 import axios from "axios";
 import { url } from "../MovieList/constants/requestUrl";
 import SeatMatrix from "./components/SeatMatrix/Seatmatrix";
+import { IMovie } from "../MovieList/components/MovieCard/types/IMovie";
 
-const Schedule = (props: { filmId: string | undefined }) => {
+const Schedule = (props: { filmId: string | undefined; film: IMovie }) => {
   const [schedule, setSchedule] = useState<ScheduleItem[]>([]);
   const [selectedDate, setSelectedDate] = useState<string>("");
   const [selectedSeance, setSelectedSeance] = useState<Seance | null>(null);
@@ -117,7 +118,9 @@ const Schedule = (props: { filmId: string | undefined }) => {
         ))}
       </div>
 
-      {selectedSeance && <SeatMatrix seance={selectedSeance} />}
+      {selectedSeance && (
+        <SeatMatrix seance={selectedSeance} film={props.film} />
+      )}
     </div>
   );
 };

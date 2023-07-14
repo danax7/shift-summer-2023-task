@@ -5,6 +5,7 @@ import { IMovie } from "../../../modules/MovieList/components/MovieCard/types/IM
 import { url } from "../../../modules/MovieList/constants/requestUrl";
 import s from "./FilmPage.module.scss";
 import Schedule from "../../../modules/Schedule/Schedule";
+import loader from "../../../assets/loader/doggyLoader.gif";
 
 const FilmPage = () => {
   const { filmId } = useParams<{ filmId: string }>();
@@ -24,7 +25,11 @@ const FilmPage = () => {
   }, [filmId]);
 
   if (!film) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        <img src={loader} alt="Loading..." />
+      </div>
+    );
   }
 
   return (
@@ -58,7 +63,7 @@ const FilmPage = () => {
           </div>
         </div>
 
-        <Schedule filmId={filmId} />
+        <Schedule filmId={filmId} film={film} />
       </div>
     </div>
   );
