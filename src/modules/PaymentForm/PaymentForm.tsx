@@ -10,21 +10,17 @@ const PaymentForm = ({ onSubmit, onCancel }) => {
   const [expiryDate, setExpiryDate] = useState("");
   const [cvv, setCvv] = useState("");
 
-  const handleSubmit = (e: { preventDefault: () => void }) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     const paymentData = {
-      person: {
-        firstname: firstName,
-        lastname: lastName,
-        middlename: middleName,
-        phone: phone,
-      },
-      debitCard: {
-        pan: cardNumber,
-        expireDate: expiryDate,
-        cvv: cvv,
-      },
+      firstname: firstName,
+      lastname: lastName,
+      middlename: middleName,
+      phone: phone,
+      cardNumber: cardNumber,
+      expiryDate: expiryDate,
+      cvv: cvv,
     };
 
     onSubmit(paymentData);
@@ -74,14 +70,14 @@ const PaymentForm = ({ onSubmit, onCancel }) => {
           <input
             type="text"
             id="expiryDate"
-            value={phone}
+            value={expiryDate}
             onChange={(e) => setExpiryDate(e.target.value)}
           />
           <label htmlFor="cvv">CVV</label>
           <input
             type="text"
             id="cvv"
-            value={phone}
+            value={cvv}
             onChange={(e) => setCvv(e.target.value)}
           />
         </div>

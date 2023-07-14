@@ -4,6 +4,8 @@ import s from "./OrderInfo.module.scss";
 import { IMovie } from "../../../MovieList/components/MovieCard/types/IMovie";
 import PaymentForm from "../../../PaymentForm/PaymentForm";
 import ConfirmationModal from "../../../PaymentForm/components/ConfirmationModal/ConfirmationModal";
+import axios from "axios";
+import { url } from "../../../../app/constants/requestUrl";
 
 interface OrderInfoProps {
   seance: Seance;
@@ -40,9 +42,38 @@ const OrderInfo = ({
     setShowPaymentForm(true);
   };
 
-  const handlePaymentSubmit = (paymentData) => {
-    setShowPaymentForm(false);
-    setShowConfirmationModal(true);
+  const handlePaymentSubmit = async (paymentData) => {
+    try {
+      const response = await axios.post(url + "/cinema/payment", {
+        filmId: film.id,
+        person: {
+          firstname: paymentData.firstname,
+          lastname: paymentData.lastname,
+          middlename: paymentData.middlename,
+          phone: paymentData.phone,
+        },
+        debitCard: {
+          pan: paymentData.cardNumber,
+          expireDate: paymentData.expiryDate,
+          cvv: paymentData.cvv,
+        },
+        seance: {
+          date: selectedDate,
+          time: seance.time,
+        },
+        tickets: selectedSeats.map((seat) => ({
+          row: Math.floor((seat - 1) / seance.hall.places[0].length) + 1,
+          column: ((seat - 1) % seance.hall.places[0].length) + 1,
+        })),
+      });
+      console.log(response.data);
+      if (response.status === 200) {
+        setShowPaymentForm(false);
+        setShowConfirmationModal(true);
+      }
+    } catch (error) {
+      console.error("Error during payment:", error);
+    }
   };
 
   const handleConfirmationClose = () => {
@@ -77,23 +108,6 @@ const OrderInfo = ({
         <PaymentForm
           onSubmit={handlePaymentSubmit}
           onCancel={() => setShowPaymentForm(false)}
-        />
-      )}
-
-      {showConfirmationModal && (
-        <ConfirmationModal
-          filmName={film.name}
-          tickets={selectedSeats.map((seat) => ({
-            filmId: film.id,
-            row: Math.floor((seat - 1) / seance.hall.places[0].length) + 1,
-            column: ((seat - 1) % seance.hall.places[0].length) + 1,
-            seance: {
-              date: selectedDate,
-              time: seance.time,
-            },
-            phone: "",
-          }))}
-          onClose={handleConfirmationClose}
         />
       )}
     </div>

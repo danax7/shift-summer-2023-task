@@ -18,7 +18,7 @@ const Schedule = (props: { filmId: string | undefined; film: IMovie }) => {
           url + `/cinema/film/${props.filmId}/schedule`
         );
         const schedules = response.data.schedules;
-        console.log(schedules);
+        //console.log(schedules);
         if (schedules.length > 0) {
           const sortedSchedules = schedules.map(
             (scheduleItem: { seances: Seance[] }) => ({
