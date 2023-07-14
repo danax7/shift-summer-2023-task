@@ -7,9 +7,10 @@ import { IMovie } from "../../../MovieList/components/MovieCard/types/IMovie";
 interface SeatMatrixProps {
   seance: Seance;
   film: IMovie;
+  selectedDate: string;
 }
 
-const SeatMatrix = ({ seance, film }: SeatMatrixProps) => {
+const SeatMatrix = ({ seance, film, selectedDate }: SeatMatrixProps) => {
   const [selectedSeats, setSelectedSeats] = useState<number[]>([]);
 
   const handleSeatClick = (rowIndex: number, placeIndex: number) => {
@@ -98,6 +99,7 @@ const SeatMatrix = ({ seance, film }: SeatMatrixProps) => {
         <OrderInfo
           seance={seance}
           selectedSeats={selectedSeats}
+          selectedDate={selectedDate}
           totalPrice={calculateTotalPrice()}
           handleClearSeats={handleClearSeats}
           film={film}

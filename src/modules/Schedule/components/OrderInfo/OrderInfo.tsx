@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { Seance } from "../../types/ISchedule";
 import s from "./OrderInfo.module.scss";
 import { IMovie } from "../../../MovieList/components/MovieCard/types/IMovie";
+import PaymentForm from "../../../PaymentForm/PaymentForm";
+import ConfirmationModal from "../../../PaymentForm/components/ConfirmationModal/ConfirmationModal";
 
 interface OrderInfoProps {
   seance: Seance;
@@ -9,6 +11,7 @@ interface OrderInfoProps {
   totalPrice: number;
   handleClearSeats: () => void;
   film: IMovie;
+  selectedDate: string;
 }
 
 const OrderInfo = ({
@@ -17,6 +20,7 @@ const OrderInfo = ({
   totalPrice,
   handleClearSeats,
   film,
+  selectedDate,
 }: OrderInfoProps) => {
   const formatSelectedSeats = () => {
     return selectedSeats
@@ -29,6 +33,23 @@ const OrderInfo = ({
       .join(", ");
   };
 
+  const [showPaymentForm, setShowPaymentForm] = useState(false);
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+
+  const handleBuyClick = () => {
+    setShowPaymentForm(true);
+  };
+
+  const handlePaymentSubmit = (paymentData) => {
+    setShowPaymentForm(false);
+    setShowConfirmationModal(true);
+  };
+
+  const handleConfirmationClose = () => {
+    handleClearSeats();
+    setShowConfirmationModal(false);
+  };
+
   return (
     <div className={s.OrderInfo}>
       <div className={s.MovieInfo}>
@@ -37,7 +58,7 @@ const OrderInfo = ({
         <p className={s.info}>{film.name}</p>
         <p className={s.FilmText}>Дата и время сеанса:</p>
         <p className={s.info}>
-          {seance.date} {seance.time}
+          {selectedDate} {seance.time}
         </p>
         <p className={s.FilmText}>Места: </p>
         <p className={s.info}>{formatSelectedSeats()}</p>
@@ -47,15 +68,34 @@ const OrderInfo = ({
         <button className={s.Button} onClick={handleClearSeats}>
           Очистить
         </button>
-        <button
-          className={s.Button}
-          onClick={() => {
-            console.log("Выбранные места:", selectedSeats);
-          }}
-        >
+        <button className={s.Button} onClick={handleBuyClick}>
           Купить
         </button>
       </div>
+
+      {showPaymentForm && (
+        <PaymentForm
+          onSubmit={handlePaymentSubmit}
+          onCancel={() => setShowPaymentForm(false)}
+        />
+      )}
+
+      {showConfirmationModal && (
+        <ConfirmationModal
+          filmName={film.name}
+          tickets={selectedSeats.map((seat) => ({
+            filmId: film.id,
+            row: Math.floor((seat - 1) / seance.hall.places[0].length) + 1,
+            column: ((seat - 1) % seance.hall.places[0].length) + 1,
+            seance: {
+              date: selectedDate,
+              time: seance.time,
+            },
+            phone: "",
+          }))}
+          onClose={handleConfirmationClose}
+        />
+      )}
     </div>
   );
 };

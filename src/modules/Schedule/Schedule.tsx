@@ -119,7 +119,11 @@ const Schedule = (props: { filmId: string | undefined; film: IMovie }) => {
       </div>
 
       {selectedSeance && (
-        <SeatMatrix seance={selectedSeance} film={props.film} />
+        <SeatMatrix
+          seance={selectedSeance}
+          film={props.film}
+          selectedDate={selectedDate}
+        />
       )}
     </div>
   );
