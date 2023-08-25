@@ -6,6 +6,7 @@ import PaymentForm from "../../../PaymentForm/PaymentForm";
 import ConfirmationModal from "../../../PaymentForm/components/ConfirmationModal/ConfirmationModal";
 import axios from "axios";
 import { url } from "../../../../app/constants/requestUrl";
+import SuccessModal from "../../../PaymentForm/components/SuccessModal/SuccessModal";
 
 interface OrderInfoProps {
   seance: Seance;
@@ -36,8 +37,10 @@ const OrderInfo = ({
   };
 
   const [showPaymentForm, setShowPaymentForm] = useState(false);
-  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
 
+  // const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [orderNumber, setOrderNumber] = useState(0);
   const handleBuyClick = () => {
     setShowPaymentForm(true);
   };
@@ -67,9 +70,11 @@ const OrderInfo = ({
         })),
       });
       console.log(response.data);
-      if (response.status === 200) {
+      if (response.data.success === true) {
+        setOrderNumber(response.data.order.orderNumber);
+        console.log(response.data.order.orderNumber);
         setShowPaymentForm(false);
-        setShowConfirmationModal(true);
+        setShowSuccessModal(true);
       }
     } catch (error) {
       console.error("Error during payment:", error);
@@ -78,7 +83,6 @@ const OrderInfo = ({
 
   const handleConfirmationClose = () => {
     handleClearSeats();
-    setShowConfirmationModal(false);
   };
 
   return (
@@ -108,6 +112,16 @@ const OrderInfo = ({
         <PaymentForm
           onSubmit={handlePaymentSubmit}
           onCancel={() => setShowPaymentForm(false)}
+        />
+      )}
+
+      {showSuccessModal && (
+        <SuccessModal
+          onClose={() => setShowSuccessModal(false)}
+          orderNumber={orderNumber}
+          filmName={film.name}
+          selectedDate={selectedDate}
+          selectedSeats={formatSelectedSeats()}
         />
       )}
     </div>

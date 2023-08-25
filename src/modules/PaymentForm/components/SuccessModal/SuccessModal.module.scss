@@ -1,0 +1,55 @@
+.SuccessModal {
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+  .Modal {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 16px;
+    max-width: 430px;
+    min-width: 370px;
+  }
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  color: #585858;
+  font-size: 28px;
+}
+
+.SuccessBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ticketNumber {
+  color: #585858;
+  font-size: 28px;
+  font-weight: 500;
+}
+
+.OrderNumber {
+  color: #e2b33a;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 28px;
+  letter-spacing: 0.01em;
+  text-align: left;
+}
+
+.text {
+  color: #b89e9e;
+  font-size: 24px;
+  font-weight: 500;
+}
