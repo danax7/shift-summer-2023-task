@@ -1,5 +1,6 @@
 import s from "./SuccessModal.module.scss";
 import GreenCheck from "../../../../assets/icons/GreenCheck.png";
+import closeCross from "../../../../assets/icons/closeCross.svg";
 
 interface SuccessModalProps {
   onClose: () => void;
@@ -14,6 +15,9 @@ const SuccessModal = (props: SuccessModalProps) => {
   return (
     <div className={s.SuccessModal}>
       <div className={s.Modal}>
+        <button className={s.CloseButton} onClick={props.onClose}>
+          <img alt="close" className={s.CrossImg} src={closeCross} />
+        </button>
         <h2 className={s.title}>Оплата прошла успешно!</h2>
         <div className={s.SuccessBlock}>
           <img alt="logo" className={s.LogoImage} src={GreenCheck} />
@@ -27,6 +31,9 @@ const SuccessModal = (props: SuccessModalProps) => {
           <p className={s.info}>{props.selectedDate}</p>
           <p className={s.text}>Места</p>
           <p className={s.info}>{props.selectedSeats}</p>
+        </div>
+        <div className={s.additionalInfo}>
+          Вся информация была продублирована в SMS
         </div>
       </div>
     </div>
