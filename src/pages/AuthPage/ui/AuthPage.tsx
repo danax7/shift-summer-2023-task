@@ -5,6 +5,9 @@ import axios from "axios";
 
 const AuthPage = () => {
   const [phone, setPhone] = useState("");
+  const [SMS, setSMS] = useState("");
+  const [isSMS, setIsSMS] = useState(false);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit(phone);
@@ -16,6 +19,10 @@ const AuthPage = () => {
         phone: phone,
       });
       console.log(response.data);
+      if (response.data.success === true) {
+        setIsSMS(true);
+        console.log(response.data.retryDelay);
+      }
     } catch (error) {
       console.error("Error during auth:", error);
     }
@@ -26,22 +33,32 @@ const AuthPage = () => {
       <form onSubmit={handleSubmit}>
         <h2 className={s.title}>Авторизация</h2>
         <div className={s.FieldGroup}>
-          <label htmlFor="phone">Номер телефона*</label>
-          <input
-            type="text"
-            id="phone"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-          />
+          <div className={s.inputAndLabelBlock}>
+            <label htmlFor="phone">Номер телефона*</label>
+            <input
+              type="text"
+              id="phone"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+            />
+          </div>
+          {isSMS && (
+            <div className={s.inputAndLabelBlock}>
+              <label htmlFor="SMS_code">Код из SMS</label>
+              <input
+                type="text"
+                id="SMS_code"
+                value={SMS}
+                onChange={(e) => setSMS(e.target.value)}
+              />
+            </div>
+          )}
         </div>
 
         <div className={s.Actions}>
           <button type="submit" className={s.SubmitButton}>
             Продолжить
           </button>
-          {/* <button type="button" className={s.CancelButton}>
-            Отмена
-          </button> */}
         </div>
       </form>
     </div>
