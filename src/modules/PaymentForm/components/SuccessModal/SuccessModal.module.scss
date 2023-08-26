@@ -16,7 +16,7 @@
     padding: 30px;
     border-radius: 16px;
     max-width: 420px;
-    min-width: 370px;
+    margin: 32px;
   }
 }
 .CloseButton {
@@ -31,7 +31,8 @@
   display: flex;
   justify-content: center;
   color: #585858;
-  font-size: 28px;
+  font-size: 24px;
+  line-height: 26px;
 }
 
 .SuccessBlock {

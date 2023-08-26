@@ -41,6 +41,7 @@ const OrderInfo = ({
   // const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [orderNumber, setOrderNumber] = useState(0);
+
   const handleBuyClick = () => {
     setShowPaymentForm(true);
   };
@@ -69,6 +70,7 @@ const OrderInfo = ({
           column: ((seat - 1) % seance.hall.places[0].length) + 1,
         })),
       });
+      console.log(selectedSeats);
       console.log(response.data);
       if (response.data.success === true) {
         setOrderNumber(response.data.order.orderNumber);
