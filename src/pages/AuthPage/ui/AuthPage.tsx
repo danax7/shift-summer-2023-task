@@ -1,16 +1,24 @@
 import React, { useState } from "react";
 import s from "./AuthPage.module.scss";
+import { url } from "../../../app/constants/requestUrl";
+import axios from "axios";
 
 const AuthPage = () => {
   const [phone, setPhone] = useState("");
   const handleSubmit = (e) => {
     e.preventDefault();
+    onSubmit(phone);
+  };
 
-    const paymentData = {
-      phone: phone,
-    };
-
-    // onSubmit(paymentData);
+  const onSubmit = async (phone: string) => {
+    try {
+      const response = await axios.post(url + "/auth/otp", {
+        phone: phone,
+      });
+      console.log(response.data);
+    } catch (error) {
+      console.error("Error during auth:", error);
+    }
   };
 
   return (
@@ -31,9 +39,9 @@ const AuthPage = () => {
           <button type="submit" className={s.SubmitButton}>
             Продолжить
           </button>
-          <button type="button" className={s.CancelButton}>
+          {/* <button type="button" className={s.CancelButton}>
             Отмена
-          </button>
+          </button> */}
         </div>
       </form>
     </div>
