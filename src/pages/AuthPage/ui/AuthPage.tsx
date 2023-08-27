@@ -5,15 +5,20 @@ import axios from "axios";
 
 const AuthPage = () => {
   const [phone, setPhone] = useState("");
-  const [SMS, setSMS] = useState("");
+  const [isAuth, setisAuth] = useState(false);
+  const [otpCode, setOtpCode] = useState("");
   const [isSMS, setIsSMS] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(phone);
+    if (!isSMS) {
+      onSubmitOtp(phone);
+    } else {
+      onSubmitAuth(phone, otpCode);
+    }
   };
 
-  const onSubmit = async (phone: string) => {
+  const onSubmitOtp = async (phone: string) => {
     try {
       const response = await axios.post(url + "/auth/otp", {
         phone: phone,
@@ -22,6 +27,21 @@ const AuthPage = () => {
       if (response.data.success === true) {
         setIsSMS(true);
         console.log(response.data.retryDelay);
+      }
+    } catch (error) {
+      console.error("Error during auth:", error);
+    }
+  };
+
+  const onSubmitAuth = async (phone: string, otpCode: string) => {
+    try {
+      const response = await axios.post(url + "/users/signin", {
+        phone: phone,
+        code: otpCode,
+      });
+      console.log(response.data);
+      if (response.data.success === true) {
+        setisAuth(true);
       }
     } catch (error) {
       console.error("Error during auth:", error);
@@ -44,12 +64,12 @@ const AuthPage = () => {
           </div>
           {isSMS && (
             <div className={s.inputAndLabelBlock}>
-              <label htmlFor="SMS_code">Код из SMS</label>
+              <label htmlFor="otp_code">Код из SMS</label>
               <input
                 type="text"
-                id="SMS_code"
-                value={SMS}
-                onChange={(e) => setSMS(e.target.value)}
+                id="otp_code"
+                value={otpCode}
+                onChange={(e) => setOtpCode(e.target.value)}
               />
             </div>
           )}
