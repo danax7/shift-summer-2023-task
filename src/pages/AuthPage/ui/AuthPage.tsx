@@ -1,20 +1,25 @@
 import React, { useState } from "react";
+
 import s from "./AuthPage.module.scss";
 import { url } from "../../../app/constants/requestUrl";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const AuthPage = () => {
+  const navigate = useNavigate();
+
   const [phone, setPhone] = useState("");
   const [isAuth, setisAuth] = useState(false);
   const [otpCode, setOtpCode] = useState("");
   const [isSMS, setIsSMS] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!isSMS) {
-      onSubmitOtp(phone);
-    } else {
-      onSubmitAuth(phone, otpCode);
+      await onSubmitOtp(phone);
+    }
+    if (isSMS) {
+      await onSubmitAuth(phone, otpCode);
     }
   };
 
@@ -37,11 +42,18 @@ const AuthPage = () => {
     try {
       const response = await axios.post(url + "/users/signin", {
         phone: phone,
-        code: otpCode,
+        code: Number(otpCode),
       });
-      console.log(response.data);
+
+      console.log(response.data.success);
+      console.log(response.status);
+      console.log(isAuth);
       if (response.data.success === true) {
         setisAuth(true);
+        console.log(response.data.success);
+        console.log(response.data);
+        console.log(isAuth);
+        navigate("/profile");
       }
     } catch (error) {
       console.error("Error during auth:", error);
