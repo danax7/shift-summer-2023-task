@@ -49,6 +49,7 @@ const AuthPage = () => {
       console.log(response.status);
       console.log(isAuth);
       if (response.data.success === true) {
+        localStorage.setItem("authToken", response.data.token);
         setisAuth(true);
         console.log(response.data.success);
         console.log(response.data);
