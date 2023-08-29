@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { url } from "../../app/constants/requestUrl";
 
@@ -6,6 +7,9 @@ const AuthContext = createContext<any>(null);
 
 export const AuthProvider: React.FC = ({ children }) => {
   const [isAuth, setIsAuth] = useState(false);
+  const [onAuthPage, setOnAuthPage] = useState(false);
+
+  const location = useLocation();
 
   useEffect(() => {
     const getSession = async () => {
@@ -24,10 +28,11 @@ export const AuthProvider: React.FC = ({ children }) => {
       } catch (error) {
         console.error("Ошибка при получении сессии:", error);
       }
+      setOnAuthPage(location.pathname === "/auth");
     };
 
     getSession();
-  }, []);
+  }, [location.pathname]);
 
   const updateSessionStatus = async () => {
     try {
@@ -48,7 +53,15 @@ export const AuthProvider: React.FC = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ isAuth, setIsAuth, updateSessionStatus }}>
+    <AuthContext.Provider
+      value={{
+        isAuth,
+        setIsAuth,
+        updateSessionStatus,
+        onAuthPage,
+        setOnAuthPage,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
