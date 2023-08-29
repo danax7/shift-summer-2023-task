@@ -1,31 +1,59 @@
-import React, { createContext, useContext, useState, ReactNode } from "react";
-import { IAuthContext } from "./types";
+import React, { createContext, useContext, useState, useEffect } from "react";
+import axios from "axios";
+import { url } from "../../app/constants/requestUrl";
 
-const AuthContext = createContext<IAuthContext | undefined>(undefined);
+const AuthContext = createContext<any>(null);
 
-export function AuthProvider({ children }: { children: ReactNode }) {
+export const AuthProvider: React.FC = ({ children }) => {
   const [isAuth, setIsAuth] = useState(false);
 
-  const login = () => {
-    setIsAuth(true);
-  };
+  useEffect(() => {
+    const getSession = async () => {
+      try {
+        const token = sessionStorage.getItem("authToken");
+        if (token) {
+          const response = await axios.get(url + "/users/session", {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          if (response.data.success === true) {
+            setIsAuth(true);
+          }
+        }
+      } catch (error) {
+        console.error("Ошибка при получении сессии:", error);
+      }
+    };
 
-  const logout = () => {
-    setIsAuth(false);
-    sessionStorage.removeItem("authToken");
-  };
+    getSession();
+  }, []);
 
-  const contextValue = { isAuth, login, logout };
+  const updateSessionStatus = async () => {
+    try {
+      const token = sessionStorage.getItem("authToken");
+      if (token) {
+        const response = await axios.get(url + "/users/session", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        if (response.data.success === true) {
+          setIsAuth(true);
+        }
+      }
+    } catch (error) {
+      console.error("Ошибка при обновлении сессии:", error);
+    }
+  };
 
   return (
-    <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ isAuth, setIsAuth, updateSessionStatus }}>
+      {children}
+    </AuthContext.Provider>
   );
-}
+};
 
-export function useAuth() {
-  const context = useContext(AuthContext);
-  // if (!context) {
-  //   throw new Error("useAuth must be used within an AuthProvider");
-  // }
-  return context;
-}
+export const useAuth = () => {
+  return useContext(AuthContext);
+};

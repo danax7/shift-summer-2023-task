@@ -1,15 +1,14 @@
 import React, { useState } from "react";
-
 import s from "./AuthPage.module.scss";
 import { url } from "../../../app/constants/requestUrl";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../../global/AuthContext/AuthContext";
 
 const AuthPage = () => {
   const navigate = useNavigate();
-
   const [phone, setPhone] = useState("");
-  const [isAuth, setisAuth] = useState(false);
+  const { updateSessionStatus } = useAuth();
   const [otpCode, setOtpCode] = useState("");
   const [isSMS, setIsSMS] = useState(false);
 
@@ -45,15 +44,9 @@ const AuthPage = () => {
         code: Number(otpCode),
       });
 
-      console.log(response.data.success);
-      console.log(response.status);
-      console.log(isAuth);
       if (response.data.success === true) {
         sessionStorage.setItem("authToken", response.data.token);
-        setisAuth(true);
-        console.log(response.data.success);
-        console.log(response.data);
-        console.log(isAuth);
+        updateSessionStatus(); // Вызываем функцию обновления сессии
         navigate("/profile");
       }
     } catch (error) {
