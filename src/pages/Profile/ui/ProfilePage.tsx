@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
-
 import axios from "axios";
-
 import { url } from "../../../modules/MovieList/constants/requestUrl";
 import s from "./ProfilePage.module.scss";
 
@@ -10,7 +8,7 @@ const ProfilePage = () => {
   useEffect(() => {
     const getSession = async () => {
       try {
-        const token = localStorage.getItem("authToken");
+        const token = sessionStorage.getItem("authToken");
         const response = await axios.get(url + "/users/session", {
           headers: {
             Authorization: `Bearer ${token}`,
