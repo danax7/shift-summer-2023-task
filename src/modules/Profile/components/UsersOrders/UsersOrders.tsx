@@ -1,8 +1,11 @@
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { url } from "../../../../app/constants/requestUrl";
+import OrderCard from "../OrderCard/OrderCard";
 
 const UsersOrders = () => {
+  const [orders, setOrders] = useState<Order[]>([]);
+
   useEffect(() => {
     const getOrders = async () => {
       try {
@@ -13,21 +16,31 @@ const UsersOrders = () => {
               Authorization: `Bearer ${token}`,
             },
           });
+          console.log(response.data);
           if (response.data.success === true) {
-            console.log(response.data);
-            // setIsAuth(true);
+            setOrders(response.data.orders);
           }
         }
       } catch (error) {
-        console.error("Ошибка при получении сессии:", error);
+        console.error("Ошибка при получении заказов:", error);
       }
-      //   setOnAuthPage(location.pathname === "/auth");
     };
 
     getOrders();
   }, []);
 
-  return <div>data</div>;
+  return (
+    <div>
+      {orders.map((order, index) => (
+        <OrderCard
+          key={index}
+          filmIdIndex={index}
+          seance={order.tickets[index].seance}
+          tickets={order.tickets}
+        />
+      ))}
+    </div>
+  );
 };
 
 export default UsersOrders;
