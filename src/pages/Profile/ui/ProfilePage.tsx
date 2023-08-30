@@ -1,6 +1,7 @@
 import React from "react";
 import s from "./ProfilePage.module.scss";
 import { useAuth } from "../../../global/AuthContext/AuthContext";
+import UsersOrders from "../../../modules/Profile/components/UsersOrders/UsersOrders";
 
 const ProfilePage = () => {
   const { isAuth, onAuthPage } = useAuth();
@@ -8,7 +9,15 @@ const ProfilePage = () => {
   console.log("onAuthPage", onAuthPage);
   console.log(isAuth);
   return (
-    <div>{isAuth ? <div>ProfilePage</div> : <div>Вы не авторизованы</div>}</div>
+    <div>
+      {isAuth ? (
+        <div>
+          <UsersOrders />
+        </div>
+      ) : (
+        <div>Вы не авторизованы</div>
+      )}
+    </div>
   );
 };
 
