@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { url } from "../../../../app/constants/requestUrl";
 import OrderCard from "../OrderCard/OrderCard";
+import s from "./UsersOrders.module.scss";
 
 const UsersOrders = () => {
   const [orders, setOrders] = useState<Order[]>([]);
@@ -17,7 +18,7 @@ const UsersOrders = () => {
             },
           });
           console.log(response.data);
-          if (response.data.success === true) {
+          if (response.data.success) {
             setOrders(response.data.orders);
           }
         }
@@ -31,12 +32,15 @@ const UsersOrders = () => {
 
   return (
     <div>
+      <h3 className={s.title}>Действующие билеты</h3>
       {orders.map((order, index) => (
         <OrderCard
           key={index}
           filmIdIndex={index}
           seance={order.tickets[index].seance}
           tickets={order.tickets}
+          orderNumber={order.orderNumber}
+          status={order.status}
         />
       ))}
     </div>

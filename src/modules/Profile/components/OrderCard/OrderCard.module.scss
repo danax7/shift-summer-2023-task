@@ -1,0 +1,52 @@
+.OrderCard {
+  margin-top: 20px;
+  border-radius: 16px;
+  background: var(--white, #fff);
+  box-shadow: 0px 4px 12px 0px rgba(37, 37, 37, 0.25);
+  max-width: 440px;
+  min-width: 320px;
+  height: fit-content;
+  h3 {
+    margin: 0;
+    color: var(--grey, #585858);
+    text-align: center;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 500;
+  }
+}
+
+.TimeRow {
+  display: flex;
+  justify-content: space-between;
+  color: var(--lightgrey, #949494);
+  text-align: center;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+}
+.StatusRow {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+
+  .payed {
+    display: flex;
+    background-color: var(--green, #44c341);
+    padding: 5px;
+    height: 17px;
+    color: var(--white, #fff);
+    border-radius: 6px;
+    justify-content: center;
+    align-items: center;
+  }
+  .orderNumber {
+    color: var(--green, #44c341);
+  }
+}
+.OrderCardWrapper {
+  padding: 12px;
+}

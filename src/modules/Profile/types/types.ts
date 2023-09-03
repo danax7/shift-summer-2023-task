@@ -18,9 +18,3 @@ interface Order {
   phone: string;
   status: string;
 }
-
-interface ApiResponse {
-  success: boolean;
-  reason: string;
-  orders: Order[];
-}

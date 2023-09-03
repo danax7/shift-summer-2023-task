@@ -10,13 +10,8 @@ const ProfilePage = () => {
   console.log(isAuth);
   return (
     <div>
-      {isAuth ? (
-        <div>
-          <UsersOrders />
-        </div>
-      ) : (
-        <div>Вы не авторизованы</div>
-      )}
+      <h3 className={s.title}>Личный кабинет</h3>
+      {isAuth ? <UsersOrders /> : <div>Вы не авторизованы</div>}
     </div>
   );
 };
