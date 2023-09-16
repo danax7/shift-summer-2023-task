@@ -46,7 +46,7 @@ const AuthPage = () => {
 
       if (response.data.success === true) {
         sessionStorage.setItem("authToken", response.data.token);
-        updateSessionStatus(); // Вызываем функцию обновления сессии
+        updateSessionStatus();
         navigate("/profile");
       }
     } catch (error) {

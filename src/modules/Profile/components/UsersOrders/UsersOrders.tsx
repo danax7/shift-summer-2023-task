@@ -36,8 +36,9 @@ const UsersOrders = () => {
       {orders.map((order, index) => (
         <OrderCard
           key={index}
-          filmIdIndex={index}
-          seance={order.tickets[index].seance}
+          seanceDate={order.tickets[0]?.seance.date}
+          seanceTime={order.tickets[0]?.seance.time}
+          filmName={order.tickets[0]?.filmId}
           tickets={order.tickets}
           orderNumber={order.orderNumber}
           status={order.status}

@@ -5,9 +5,6 @@ import UsersOrders from "../../../modules/Profile/components/UsersOrders/UsersOr
 
 const ProfilePage = () => {
   const { isAuth, onAuthPage } = useAuth();
-
-  console.log("onAuthPage", onAuthPage);
-  console.log(isAuth);
   return (
     <div>
       <h3 className={s.title}>Личный кабинет</h3>

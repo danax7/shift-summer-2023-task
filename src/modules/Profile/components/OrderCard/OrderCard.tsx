@@ -1,16 +1,18 @@
 import s from "./OrderCard.module.scss";
 interface OrderCardProps {
-  seance: Seance;
+  seanceDate: string;
+  seanceTime: string;
+  filmName: string;
   tickets: Ticket[];
-  filmIdIndex: number;
   orderNumber: number;
   status: string;
 }
 
 const OrderCard = ({
-  seance,
+  seanceDate,
+  seanceTime,
+  filmName,
   tickets,
-  filmIdIndex,
   orderNumber,
   status,
 }: OrderCardProps) => {
@@ -18,11 +20,10 @@ const OrderCard = ({
     <div className={s.OrderCard}>
       <div className={s.OrderCardWrapper}>
         <div className={s.TimeRow}>
-          <p>{seance.date} </p>
-          <p> {seance.time}</p>
+          <p>{seanceDate}</p>
+          <p>{seanceTime}</p>
         </div>
-        <h3>Фильм:{tickets[filmIdIndex].filmId}</h3>
-
+        <h3>Фильм: {filmName}</h3>
         <ul>
           {tickets.map((ticket, index) => (
             <li key={index}>
