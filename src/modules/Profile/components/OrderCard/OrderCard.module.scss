@@ -50,3 +50,18 @@
 .OrderCardWrapper {
   padding: 12px;
 }
+
+.CancelButton {
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 14px;
+  display: flex;
+  background-color: var(--green, #f55a5a);
+  padding: 3px;
+
+  color: var(--white, #fff);
+  border-radius: 6px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}

@@ -9,7 +9,6 @@ const LoginButtons = () => {
     sessionStorage.removeItem("authToken");
     setIsAuth(false);
   };
-  console.log(onAuthPage);
   return (
     <div className={s.loginButtonWrapper}>
       {onAuthPage && <div></div>}

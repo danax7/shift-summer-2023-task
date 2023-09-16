@@ -40,7 +40,7 @@ const UsersOrders = () => {
           seanceTime={order.tickets[0]?.seance.time}
           filmName={order.tickets[0]?.filmId}
           tickets={order.tickets}
-          orderNumber={order.orderNumber}
+          orderNumber={order.orderNumber.toString()}
           status={order.status}
         />
       ))}
