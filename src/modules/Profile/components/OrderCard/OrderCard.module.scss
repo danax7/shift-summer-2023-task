@@ -43,6 +43,16 @@
     justify-content: center;
     align-items: center;
   }
+  .cancelled {
+    display: flex;
+    background-color: var(--red, #f55a5a);
+    padding: 5px;
+    height: 17px;
+    color: var(--white, #fff);
+    border-radius: 6px;
+    justify-content: center;
+    align-items: center;
+  }
   .orderNumber {
     color: var(--green, #44c341);
   }
@@ -58,7 +68,7 @@
   display: flex;
   background-color: var(--green, #f55a5a);
   padding: 3px;
-
+  border: none;
   color: var(--white, #fff);
   border-radius: 6px;
   justify-content: center;

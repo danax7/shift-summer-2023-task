@@ -18,6 +18,7 @@ const UsersOrders = () => {
             },
           });
           console.log(response.data);
+          console.log(response.data.orders[0]._id);
           if (response.data.success) {
             setOrders(response.data.orders);
           }
@@ -33,17 +34,20 @@ const UsersOrders = () => {
   return (
     <div>
       <h3 className={s.title}>Действующие билеты</h3>
-      {orders.map((order, index) => (
-        <OrderCard
-          key={index}
-          seanceDate={order.tickets[0]?.seance.date}
-          seanceTime={order.tickets[0]?.seance.time}
-          filmName={order.tickets[0]?.filmId}
-          tickets={order.tickets}
-          orderNumber={order.orderNumber.toString()}
-          status={order.status}
-        />
-      ))}
+      {orders.map((order, index) =>
+        order.status === "PAYED" ? (
+          <OrderCard
+            key={index}
+            seanceDate={order.tickets[0]?.seance.date}
+            seanceTime={order.tickets[0]?.seance.time}
+            filmName={order.tickets[0]?.filmId}
+            tickets={order.tickets}
+            orderNumber={order.orderNumber}
+            status={order.status}
+            orderId={orders[index]._id}
+          />
+        ) : null
+      )}
     </div>
   );
 };

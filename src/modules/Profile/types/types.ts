@@ -17,4 +17,5 @@ interface Order {
   tickets: Ticket[];
   phone: string;
   status: string;
+  _id: string;
 }

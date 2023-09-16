@@ -7,8 +7,9 @@ interface OrderCardProps {
   seanceTime: string;
   filmName: string;
   tickets: Ticket[];
-  orderNumber: string;
+  orderNumber: number;
   status: string;
+  orderId: string;
 }
 
 const OrderCard = ({
@@ -18,6 +19,7 @@ const OrderCard = ({
   tickets,
   orderNumber,
   status,
+  orderId,
 }: OrderCardProps) => {
   const [orderStatus, setOrderStatus] = useState(status);
   const cancelOrder = async () => {
@@ -28,7 +30,7 @@ const OrderCard = ({
         const response = await axios.put(
           url + "/cinema/orders/cancel",
           {
-            orderId: orderNumber,
+            orderId: orderId,
           },
           {
             headers: {
@@ -38,7 +40,7 @@ const OrderCard = ({
         );
         console.log(response.data);
         if (response.data.success) {
-          setOrderStatus("CANCELLED"); // Устанавливаем статус заказа в "отменен"
+          setOrderStatus("CANCELLED");
         }
       }
     } catch (error) {
