@@ -1,20 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { AppThunk } from "../../store/store";
+import { AppThunk } from "./thunk";
 import { IMovie } from "./types";
 import axios from "axios";
 import { url } from "../../app/constants/requestUrl";
-
-interface MoviesState {
-  data: IMovie[];
-  loading: boolean;
-  error: string | null;
-}
-
-const initialState: MoviesState = {
-  data: [],
-  loading: false,
-  error: null,
-};
+import { initialState } from "./state";
 
 const moviesSlice = createSlice({
   name: "movies",

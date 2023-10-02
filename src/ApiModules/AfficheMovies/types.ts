@@ -23,3 +23,9 @@ export interface IMovie {
   };
   img: string;
 }
+
+export interface MoviesState {
+  data: IMovie[];
+  loading: boolean;
+  error: string | null;
+}
