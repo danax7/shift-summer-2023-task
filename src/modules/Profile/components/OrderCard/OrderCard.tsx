@@ -47,7 +47,9 @@ const OrderCard = ({
       console.error("Ошибка при отмене заказа:", error);
     }
   };
-
+  if (orderStatus !== "PAYED") {
+    return null;
+  }
   return (
     <div className={s.OrderCard}>
       <div className={s.OrderCardWrapper}>

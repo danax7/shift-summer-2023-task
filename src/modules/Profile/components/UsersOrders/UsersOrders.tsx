@@ -18,7 +18,6 @@ const UsersOrders = () => {
             },
           });
           console.log(response.data);
-          console.log(response.data.orders[0]._id);
           if (response.data.success) {
             setOrders(response.data.orders);
           }
