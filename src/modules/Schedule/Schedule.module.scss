@@ -1,0 +1,131 @@
+.Schedule {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.Dates {
+  display: inline-flex;
+  justify-content: space-evenly;
+  align-items: center;
+  overflow: auto;
+  @media (max-width: 700px) {
+    justify-content: flex-start;
+    gap: 10px;
+  }
+}
+
+.NonActiveDate {
+  background-color: #b89e9e;
+  width: 9%;
+  min-width: 90px;
+  height: 56px;
+  border-radius: 16px;
+  border: 0;
+  font-size: 20px;
+  color: white;
+}
+
+.ActiveDate {
+  font-size: 24px;
+  color: white;
+  border: 0;
+  width: 12%;
+  min-width: 110px;
+  height: 64px;
+  background-color: #f55a5a;
+  border-radius: 16px;
+}
+
+.Title {
+  color: #f55a5a;
+  text-align: center;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 52px;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+.ScheduleTime {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: row;
+}
+
+.SeanceHall__Red {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  padding-left: 10px;
+  padding-right: 10px;
+  height: 44px;
+  border: 3px solid #f55a5a;
+  stroke-width: 3px;
+  border-radius: 3px;
+  color: #585858;
+  text-align: center;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px;
+}
+
+.SeanceTime {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  padding-left: 10px;
+  padding-right: 10px;
+  height: 44px;
+  border: 3px solid #f55a5a;
+  stroke-width: 3px;
+  border-radius: 3px;
+  color: #585858;
+  text-align: center;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px;
+}
+.SeanceTime.Hall_Red {
+  border: 3px solid #f55a5a;
+}
+.ActiveSeance.Hall_Red {
+  background-color: #f55a5a;
+  color: white;
+}
+.SeanceTime.Hall_Green {
+  border: 3px solid #64f55a;
+}
+.ActiveSeance.Hall_Green {
+  background-color: #64f55a;
+  color: white;
+}
+.SeanceTime.Hall_Blue {
+  border: 3px solid #4656e9;
+}
+.ActiveSeance.Hall_Blue {
+  background-color: #4656e9;
+  color: white;
+}
+
+.Screen {
+  margin: 10px;
+  display: flex;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+  background: #d8cdd4;
+  color: #585858;
+  border-radius: 16px 16px 0px 0px;
+  text-align: center;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 28px;
+}

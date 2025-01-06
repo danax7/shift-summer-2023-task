@@ -1,0 +1,87 @@
+.PaymentForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 20vh;
+  form {
+    padding: 30px;
+    border-radius: 16px;
+    max-width: 430px;
+    .FieldGroup {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 20px;
+      width: 80vw;
+      max-width: 400px;
+      label {
+        margin-bottom: 5px;
+      }
+      input {
+        padding: 8px;
+        border-radius: 8px;
+        border: 1px solid var(--lightgrey, #949494);
+        background: var(--white, #fff);
+      }
+    }
+
+    .Actions {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 20px;
+
+      button {
+        padding: 10px 20px;
+        margin-top: 10px;
+        border: none;
+        border-radius: 8px;
+        font-size: 14px;
+        cursor: pointer;
+        width: 100%;
+      }
+
+      .SubmitButton {
+        background-color: #f55a5a;
+        color: #fff;
+
+        &:hover {
+          background-color: #e14a4a;
+        }
+      }
+
+      .CancelButton {
+        background-color: #ccc;
+
+        &:hover {
+          background-color: #999;
+        }
+      }
+    }
+  }
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  color: var(--darkgrey, #252525);
+  text-align: center;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+label {
+  color: #704e4e;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px; /* 120% */
+}
+.inputAndLabelBlock {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 14px;
+}

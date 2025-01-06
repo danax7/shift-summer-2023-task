@@ -1,0 +1,29 @@
+.loginButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 40px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #fff6f0;
+  cursor: pointer;
+  transition: border-color 0.25s;
+  border-color: #000;
+  outline: none;
+  text-decoration: none;
+  color: #000;
+}
+
+.loginButton:hover {
+  background-color: #ffe9e2;
+  transition: ease-out 0.5s;
+}
+
+.buttonsBlock {
+  display: flex;
+  gap: 10px;
+}

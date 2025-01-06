@@ -1,0 +1,11 @@
+.headerWrapper {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+  padding-top: 19px;
+  gap: 64px;
+  @media (max-width: 600px) {
+    gap: 0px;
+  }
+}
